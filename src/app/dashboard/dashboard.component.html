@@ -1,1 +1,19 @@
-<p>dashboard works!</p>
+<div class="container mt-4">
+    <h1 class="text-center fw-bold display-4 text-primary">Total Spend: {{ total | currency:'INR' }} / 30,000.00</h1>
+
+    <h2 class="text-center mt-4">Spend by Category</h2>
+    <table class="table table-striped table-bordered table-hover mt-3">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Category</th>
+                <th>Amount (INR)</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let category of getCategoryKeys()">
+                <td>{{ category }}</td>
+                <td>{{ budgets[category] | currency:'INR' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -10,11 +10,11 @@ import { BudgetService } from '../budget.service';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit{
-  total : number = 0.0;
-  budgets : BudgetSummary = new BudgetSummary();
+export class DashboardComponent implements OnInit {
+  total: number = 0.0;
+  budgets: BudgetSummary = new BudgetSummary();
 
-  constructor(private budgetService : BudgetService) { }
+  constructor(private budgetService: BudgetService) { }
 
   ngOnInit(): void {
     this.getBudget();
@@ -23,10 +23,14 @@ export class DashboardComponent implements OnInit{
   private getBudget() {
     this.budgetService.getTotalSpend().subscribe(data => {
       this.total = data;
-    })
+    });
 
     this.budgetService.getTotalSpendByCategory().subscribe(data => {
       this.budgets = data;
-    })
+    });
+  }
+
+  getCategoryKeys(): string[] {
+    return Object.keys(this.budgets);
   }
 }
