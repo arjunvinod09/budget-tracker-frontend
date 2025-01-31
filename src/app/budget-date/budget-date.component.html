@@ -16,7 +16,7 @@
             <tr *ngFor="let budget of budgets">
                 <td>{{budget.id}}</td>
                 <td>{{budget.category}}</td>
-                <td>{{budget.amount | currency:'INR'}}</td>
+                <td>{{budget.amount | currency}}</td>
                 <td>{{budget.description}}</td>
                 <td>
                     <span class="badge" 
