@@ -20,21 +20,10 @@ export class BudgetListComponent implements OnInit {
     this.getBudget();
   }
 
-  // private getBudget(){
-  //   this.budgetService.getBudgetList().subscribe(data => {
-  //     this.budgets = data;
-  //   });
-  // }
-
   private getBudget(){
-    this.budgetService.getBudgetList().subscribe(
-      data => {
-        console.log("API Response:", data);  // ✅ Debugging
-        this.budgets = data;
-      },
-      error => {
-        console.error("API Error:", error);  // ✅ Check for errors
-      }
-    );
+    this.budgetService.getBudgetList().subscribe(data => {
+      this.budgets = data;
+    });
   }
+  
 }

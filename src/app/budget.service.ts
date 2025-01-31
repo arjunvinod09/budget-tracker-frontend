@@ -17,8 +17,8 @@ export class BudgetService {
     return this.httpClient.get<Budget[]>(`${this.baseUrl}`)
   }
 
-  getBudgetByDate() : Observable<Budget[]> {
-    return this.httpClient.get<Budget[]>(`${this.baseUrl}/date`)
+  getBudgetByDate(date : string) : Observable<Budget[]> {
+    return this.httpClient.get<Budget[]>(`${this.baseUrl}/date?date=${date}`);
   }
 
   getTotalSpend() : Observable<number> {
@@ -27,5 +27,9 @@ export class BudgetService {
 
   getTotalSpendByCategory() : Observable<BudgetSummary> {
     return this.httpClient.get<BudgetSummary>(`${this.baseUrl}/spend/category`)
+  }
+
+  getBudgetByCategory(category : string) : Observable<Budget[]> {
+    return this.httpClient.get<Budget[]>(`${this.baseUrl}/category?category=${category}`);
   }
 }
