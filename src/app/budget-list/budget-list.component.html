@@ -9,12 +9,11 @@
                 <th>Description</th>
                 <th>Type</th>
                 <th>Date</th>
-                <th>Time</th>
             </tr>
         </thead>
         <tbody class="text-center">
             <tr *ngFor="let budget of budgets">
-                <td>{{budget.id}}</td>
+                <td>{{budget.no}}</td>
                 <td>{{budget.category}}</td>
                 <td>{{budget.amount | currency:'INR'}}</td>
                 <td>{{budget.description}}</td>
@@ -25,7 +24,6 @@
                     </span>
                 </td>
                 <td>{{budget.createdDate}}</td>
-                <td>{{budget.createdTime}}</td>
             </tr>
         </tbody>
     </table>
