@@ -1,11 +1,10 @@
 export class Budget {
-    id: number = 0;
+    no: number = 0;
     category: string = "";
     amount: number = 0;
     description: string = "";
     type: string = "DEBIT";
     createdDate: string = new Date().toISOString().split("T")[0];
-    createdTime: string = new Date().toLocaleTimeString();
 }
 
 export class BudgetSummary {
