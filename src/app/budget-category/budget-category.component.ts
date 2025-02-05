@@ -24,6 +24,7 @@ export class BudgetCategoryComponent implements OnInit{
 
   private getBudget(category : string) {
     this.budgetService.getBudgetByCategory(category).subscribe(data => {
+      data.sort((a,b) => a.no - b.no)
       this.budgets = data;
     })
   }

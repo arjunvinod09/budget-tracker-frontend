@@ -22,6 +22,7 @@ export class BudgetListComponent implements OnInit {
   private getBudget(){
     this.budgetService.getBudgetList().subscribe(data => {
       console.log(data);
+      data.sort((a,b) => a.no - b.no)
       this.budgets = data;
     });
   }
