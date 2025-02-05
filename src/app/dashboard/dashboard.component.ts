@@ -8,11 +8,10 @@ import { BudgetCategoryComponent } from '../budget-category/budget-category.comp
 import { BudgetListComponent } from '../budget-list/budget-list.component'
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [CommonModule , NgxChartsModule, BudgetCategoryComponent, BudgetListComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+    selector: 'app-dashboard',
+    imports: [CommonModule, NgxChartsModule, BudgetCategoryComponent, BudgetListComponent],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
   total: number = 0.0;

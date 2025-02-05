@@ -4,11 +4,10 @@ import { Budget } from '../budget'
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-budget-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './budget-list.component.html',
-  styleUrl: './budget-list.component.css'
+    selector: 'app-budget-list',
+    imports: [CommonModule],
+    templateUrl: './budget-list.component.html',
+    styleUrl: './budget-list.component.css'
 })
 export class BudgetListComponent implements OnInit {
 

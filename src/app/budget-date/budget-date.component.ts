@@ -4,11 +4,10 @@ import { BudgetService } from '../budget.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-budget-date',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './budget-date.component.html',
-  styleUrl: './budget-date.component.css'
+    selector: 'app-budget-date',
+    imports: [CommonModule],
+    templateUrl: './budget-date.component.html',
+    styleUrl: './budget-date.component.css'
 })
 export class BudgetDateComponent implements OnInit{
 
