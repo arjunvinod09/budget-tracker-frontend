@@ -1,5 +1,14 @@
 <div class="container mt-4">
-    <h1 class="text-center fw-bold display-4 text-primary">Total Spend: {{ total | currency:'INR' }} / 30,000.00</h1>
+    <h1 class="text-center fw-bold display-6 text-primary">
+        Total Spend: {{ total | currency:'INR' }} / 29242.00
+    </h1>
+    <h2 class="text-center fw-bold text-danger">
+        Remaining: {{ (29242 - total) | currency:'INR' }}
+    </h2>
+    
+    <h3 class="text-center fw-bold text-success">
+    Daily Budget: {{ ((29242 - total) / (28- currentDay)) | currency:'INR' }}
+    </h3>
 
     <h2 class="text-center mt-4">Spend by Category</h2>
     <table class="table table-striped table-bordered table-hover mt-3">
@@ -10,10 +19,42 @@
             </tr>
         </thead>
         <tbody class="text-center">
-            <tr *ngFor="let category of getCategoryKeys()">
-                <td>{{ category }}</td>
-                <td>{{ budgets[category] | currency:'INR' }}</td>
+            <tr *ngFor="let entry of getCategoryEntries()">
+                <td>{{ entry.category }}</td>
+                <td>{{ entry.amount | currency: 'INR' }}</td>
             </tr>
-        </tbody>
+        </tbody>        
     </table>
 </div>
+
+<div class="chart-container">
+    <ngx-charts-pie-chart
+        [view]="view"
+        [results]="budgetData"
+        [scheme]="'fire'"
+        [gradient]="gradient"
+        [labels]="showLabels"
+        [doughnut]="doughnut"
+        [explodeSlices]="explodeSlices"
+        [legend]="true"
+        (select)="onSliceSelect($event)">
+    </ngx-charts-pie-chart>
+</div>
+
+<app-budget-category 
+    *ngIf="showCategory"
+    [category] = "selectedCategory">
+</app-budget-category>
+
+<app-budget-list
+    *ngIf="showAll">
+</app-budget-list>
+
+<div class="d-flex flex-wrap gap-2 justify-content-center my-3">
+    <button *ngFor="let category of categories"
+            class="btn btn-primary px-4 py-2 btn-success"
+            (click)="onCategoryClick(category)">
+      {{ category }}
+    </button>
+  </div>
+

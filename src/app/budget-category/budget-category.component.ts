@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Budget } from '../budget';
 import { BudgetService } from '../budget.service';
 import { CommonModule } from '@angular/common';
@@ -12,12 +12,15 @@ import { CommonModule } from '@angular/common';
 })
 export class BudgetCategoryComponent implements OnInit{
 
+  @Input() category : string = "";
   budgets : Budget[] = [];
 
   constructor(private budgetService : BudgetService) { }
 
   ngOnInit(): void {
-    this.getBudget("FOOD");
+    if(this.category){
+      this.getBudget(this.category);
+    }
   }
 
   private getBudget(category : string) {
