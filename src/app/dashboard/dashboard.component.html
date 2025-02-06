@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <h1 class="text-center fw-bold display-6 text-primary">
-        Total Spend: {{ total | currency:'INR' }} / 29242.00
+        Total Spend: {{ total | currency:'INR' }} / 29,242.00
     </h1>
     <h2 class="text-center fw-bold text-danger">
         Remaining: {{ (29242 - total) | currency:'INR' }}
@@ -32,7 +32,7 @@
     <ngx-charts-pie-chart
         [view]="view"
         [results]="budgetData"
-        [scheme]="'fire'"
+        [scheme]="'natural'"
         [gradient]="gradient"
         [labels]="showLabels"
         [doughnut]="doughnut"
