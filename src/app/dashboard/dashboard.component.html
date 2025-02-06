@@ -25,7 +25,7 @@
             </tr>
         </tbody>
     </table>
-        
+
 </div>
 
 <div class="chart-container">
@@ -59,3 +59,75 @@
     </button>
   </div>
 
+<!-- 🔘 Button to open the modal -->
+<!-- <button class="btn btn-primary" (click)="openModal()">Add Budget Entry</button> -->
+
+<!-- 🔲 Bootstrap Modal (Popup) -->
+<!-- <div class="modal fade" id="budgetModal" tabindex="-1" aria-labelledby="budgetModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="budgetModalLabel">Add Budget Entry</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form (ngSubmit)="submitBudget()">
+          <div class="mb-2">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" [(ngModel)]="newBudget.description" name="description" required>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Category</label>
+            <select class="form-select" [(ngModel)]="newBudget.category" name="category" required>
+              <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+            </select>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Amount</label>
+            <input type="number" class="form-control" [(ngModel)]="newBudget.amount" name="amount" required>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Type</label>
+            <select class="form-select" [(ngModel)]="newBudget.type" name="type">
+              <option value="DEBIT">DEBIT</option>
+              <option value="CREDIT">CREDIT</option>
+            </select>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Created Date</label>
+            <input type="datetime-local" class="form-control" [(ngModel)]="newBudget.createdDate" name="createdDate">
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Bootstrap Modal -->
+<div #budgetModal class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Budget Entry</h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Type the html for form here</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="submitBudget()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button to Open Modal -->
+<button class="btn btn-primary" (click)="openModal()">Open Budget Modal</button>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { BudgetSummary } from '../budget';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Budget, BudgetSummary } from '../budget';
 import { BudgetService } from '../budget.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts'
 import { Router, TitleStrategy } from '@angular/router';
@@ -9,11 +10,13 @@ import { BudgetListComponent } from '../budget-list/budget-list.component'
 
 @Component({
     selector: 'app-dashboard',
-    imports: [CommonModule, NgxChartsModule, BudgetCategoryComponent, BudgetListComponent],
+    imports: [CommonModule, NgxChartsModule, BudgetCategoryComponent, BudgetListComponent, FormsModule],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('budgetModal') modalElement!: ElementRef;
+
   total: number = 0.0;
   budgets: BudgetSummary = new BudgetSummary();
   view: [number, number] = [700, 400]; // Width and Height of the chart
@@ -25,6 +28,10 @@ export class DashboardComponent implements OnInit {
     'FOOD', 'ENTERTAINMENT', 'SHOPPING', 'RENT', 'EMI',
     'BILLS', 'TRAVEL', 'TRANSFER', 'OTHER', 'ALL'
   ];
+
+  newBudget : Budget = new Budget();
+
+  private modalInstance: any;
 
   budgetData = [
     { name: 'Food', value: 5000 },
@@ -71,7 +78,7 @@ export class DashboardComponent implements OnInit {
       this.budgets = data;
       this.budgetData = Object.entries(this.budgets).map(([category, amount]) => ({
         name: category,
-        value: Math.abs(amount)
+        value: amount
       }));
     });
   }
@@ -85,5 +92,22 @@ export class DashboardComponent implements OnInit {
 
   onSliceSelect(event: any): void {
     this.onCategoryClick(event.name)
+  }
+
+  openModal(): void {
+    this.modalElement.nativeElement.classList.add('show');
+    this.modalElement.nativeElement.style.display = 'block';
+    document.body.classList.add('modal-open'); // Prevents background scrolling
+  }
+
+  closeModal(): void {
+    this.modalElement.nativeElement.classList.remove('show');
+    this.modalElement.nativeElement.style.display = 'none';
+    document.body.classList.remove('modal-open');
+  }
+
+  submitBudget() : void {
+    console.log("Submitted");
+    this.closeModal();
   }
 }
