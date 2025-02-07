@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('budgetModal') modalElement!: ElementRef;
 
   total: number = 0.0;
+  totalDaily: number = 0.0;
   budgets: BudgetSummary = new BudgetSummary();
   view: [number, number] = [700, 400]; // Width and Height of the chart
   currentDay: number = new Date().getDate();
@@ -72,6 +73,10 @@ export class DashboardComponent implements OnInit {
   private getBudget() {
     this.budgetService.getTotalSpend().subscribe(data => {
       this.total = data;
+    });
+
+    this.budgetService.getTotalSpendDaily().subscribe(data => {
+      this.totalDaily = data;
     });
 
     this.budgetService.getTotalSpendByCategory().subscribe(data => {
