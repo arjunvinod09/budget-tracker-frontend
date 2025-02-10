@@ -27,8 +27,16 @@ export class DashboardComponent implements OnInit {
   showAll : boolean = false;
   categories: string[] = [
     'FOOD', 'ENTERTAINMENT', 'SHOPPING', 'RENT', 'EMI',
-    'BILLS', 'TRAVEL', 'TRANSFER', 'OTHER', 'ALL'
+    'BILLS', 'TRAVEL', 'TRANSFER', 'OTHER', 'SAVINGS', 'ALL'
   ];
+
+  showXAxis = true;
+  showYAxis = true;
+  showLegend = false;
+  showXAxisLabel = true;
+  xAxisLabel = 'Days of the Month';
+  showYAxisLabel = true;
+  yAxisLabel = 'Spending (INR)';
 
   newBudget : Budget = new Budget();
 
@@ -42,6 +50,8 @@ export class DashboardComponent implements OnInit {
     { name: 'Others', value: 1000 }
   ];
 
+  budgetDataChart : any[] = [];
+
   showLabels: boolean = true;
   explodeSlices: boolean = false;
   doughnut: boolean = false;
@@ -51,6 +61,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBudget();
+    this.generateBudgetData();
+    this.loadChartData();
   }
 
   onCategoryClick(category: string) {
@@ -75,7 +87,7 @@ export class DashboardComponent implements OnInit {
       this.total = data;
     });
 
-    this.budgetService.getTotalSpendDaily().subscribe(data => {
+    this.budgetService.getTotalSpendDaily(new Date().getDate()).subscribe(data => {
       this.totalDaily = data;
     });
 
@@ -114,5 +126,29 @@ export class DashboardComponent implements OnInit {
   submitBudget() : void {
     console.log("Submitted");
     this.closeModal();
+  }
+  async loadChartData() {
+    this.budgetDataChart = await this.generateBudgetData();
+  }
+
+  async generateBudgetData() {
+    const daysInMonth = new Date().getDate();
+
+    const budgetPromises = Array.from({ length: daysInMonth }, (_, i) =>
+      this.getDailyBudget(i + 1).then(value => ({
+        name: (i + 1).toString(),
+        value: Math.max(value,0)
+      }))
+    );
+
+    return Promise.all(budgetPromises);
+  }
+
+  getDailyBudget(i: number): Promise<number> {
+    return new Promise(resolve => {
+      this.budgetService.getTotalSpendDaily(i).subscribe(data => {
+        resolve(data);
+      });
+    });
   }
 }
