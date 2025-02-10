@@ -6,10 +6,6 @@
   }
 
   .container {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
   }
   
@@ -18,3 +14,9 @@
     margin: auto;
   }
   
+  .chart-div {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
