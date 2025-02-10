@@ -84,9 +84,43 @@
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel"
       [yScaleMin]=0
-      [yScaleMax]=1000>
+      [yScaleMax]=1000
+      (select)="onBarClick($event)">
     </ngx-charts-bar-vertical>
   </div>  
+
+<div *ngIf="showDaily">
+  <h2 class="text-center mt-4">List Of Transactions on a Specific Day</h2>
+  <div class="container mt-3">
+      <table class="table table-striped table-bordered table-hover">
+          <thead class="table-dark text-center">
+              <tr>
+                  <th>ID</th>
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>Description</th>
+                  <th>Type</th>
+                  <th>Date</th>
+              </tr>
+          </thead>
+          <tbody class="text-center">
+              <tr *ngFor="let budget of dailyTransaction">
+                  <td>{{budget.no}}</td>
+                  <td>{{budget.category}}</td>
+                  <td>{{budget.amount | currency:'INR'}}</td>
+                  <td>{{budget.description}}</td>
+                  <td>
+                      <span class="badge" 
+                            [ngClass]="{'bg-success': budget.type === 'CREDIT', 'bg-danger': budget.type === 'DEBIT'}">
+                          {{budget.type}}
+                      </span>
+                  </td>
+                  <td>{{budget.createdDate}}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
 
 
 <!-- 🔘 Button to open the modal -->

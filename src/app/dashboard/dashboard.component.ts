@@ -20,11 +20,13 @@ export class DashboardComponent implements OnInit {
   total: number = 0.0;
   totalDaily: number = 0.0;
   budgets: BudgetSummary = new BudgetSummary();
+  dailyTransaction : Budget[] = [];
   view: [number, number] = [700, 400]; // Width and Height of the chart
   currentDay: number = new Date().getDate();
   selectedCategory : string = "ALL";
   showCategory : boolean = false;
   showAll : boolean = false;
+  showDaily : boolean = false;
   categories: string[] = [
     'FOOD', 'ENTERTAINMENT', 'SHOPPING', 'RENT', 'EMI',
     'BILLS', 'TRAVEL', 'TRANSFER', 'OTHER', 'SAVINGS', 'ALL'
@@ -137,7 +139,7 @@ export class DashboardComponent implements OnInit {
     const budgetPromises = Array.from({ length: daysInMonth }, (_, i) =>
       this.getDailyBudget(i + 1).then(value => ({
         name: (i + 1).toString(),
-        value: Math.max(value,0)
+        value: Math.max(value,1)
       }))
     );
 
@@ -150,5 +152,12 @@ export class DashboardComponent implements OnInit {
         resolve(data);
       });
     });
+  }
+
+  onBarClick(event : any) : void {
+    this.showDaily = true;
+    this.budgetService.getTransactionDaily(event.name).subscribe(data => {
+      this.dailyTransaction = data;
+    })
   }
 }

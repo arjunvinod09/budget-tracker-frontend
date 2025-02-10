@@ -36,4 +36,8 @@ export class BudgetService {
   getBudgetByCategory(category : string) : Observable<Budget[]> {
     return this.httpClient.get<Budget[]>(`${this.baseUrl}/category?category=${category}`);
   }
+
+  getTransactionDaily(day : number) : Observable<Budget[]> {
+    return this.httpClient.get<Budget[]>(`${this.baseUrl}/daily?day=${day}`);
+  }
 }
