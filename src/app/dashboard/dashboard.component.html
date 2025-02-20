@@ -216,17 +216,7 @@
 
       <div class="mb-3">
         <label for="category" class="form-label">Category</label>
-        <select id="category" class="form-select" [(ngModel)]="budget.category" name="category" required>
-          <option value="DEBIT">FOOD</option>
-          <option value="DEBIT">ENTERTAINMENT</option>
-          <option value="DEBIT">RENT</option>
-          <option value="DEBIT">EMI</option>
-          <option value="DEBIT">BILLS</option>
-          <option value="DEBIT">TRAVEL</option>
-          <option value="DEBIT">TRANSFER</option>
-          <option value="DEBIT">SAVINGS</option>
-          <option value="DEBIT">OTHER</option>
-        </select>
+        <input id="category" class="form-control" [(ngModel)]="budget.category" name="category" required>
       </div>
 
       <div class="mb-3">
