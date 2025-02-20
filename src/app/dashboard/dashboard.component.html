@@ -7,20 +7,20 @@
     </h2>
     
     <h3 class="text-center fw-bold text-success">
-    Daily Budget: {{ ((29242 - total) / (28- currentDay)) | currency:'INR' }}
+    Daily Budget: {{ ((29242 - total) / (noOfDays + 1 - currentDay)) | currency:'INR' }}
     </h3>
 
     <div class="container mt-4 d-flex justify-content-center">
       <div id="spendBox" 
            class="p-4 text-white text-center rounded shadow" 
-           [ngClass]="{'bg-danger': totalDaily > ((29242 - total) / (28- currentDay)), 'bg-success': totalDaily <= ((29242 - total) / (28- currentDay))}">
+           [ngClass]="{'bg-danger': totalDaily > ((29242 - total) / (noOfDays + 1 - currentDay)), 'bg-success': totalDaily <= ((29242 - total) / (noOfDays + 1 - currentDay))}">
           <h4>Today's Spend</h4>
           <h2>{{ totalDaily | currency: 'INR' }}</h2>
       </div>
   </div>
   <br>
   <h5 class="text-center fw-bold text">
-    Remaining today : {{ (((29242 - total) / (28- currentDay)) - totalDaily) | currency:'INR'}}
+    Remaining today : {{ (((29242 - total) / (noOfDays + 1 - currentDay)) - totalDaily) | currency:'INR'}}
   </h5>
 
     <h2 class="text-center mt-4">Spend by Category</h2>

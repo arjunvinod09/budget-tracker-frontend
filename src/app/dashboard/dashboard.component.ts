@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('budgetModal') modalElement!: ElementRef;
 
   total: number = 0.0;
+  noOfDays: number = 28;
   totalDaily: number = 0.0;
   budgets: BudgetSummary = new BudgetSummary();
   dailyTransaction : Budget[] = [];
