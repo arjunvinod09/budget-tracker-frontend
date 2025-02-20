@@ -40,4 +40,8 @@ export class BudgetService {
   getTransactionDaily(day : number) : Observable<Budget[]> {
     return this.httpClient.get<Budget[]>(`${this.baseUrl}/daily?day=${day}`);
   }
+  
+  addBudget(budget : any): Observable<Budget> {
+    return this.httpClient.post<Budget>(`${this.baseUrl}/new`,budget);
+  }
 }

@@ -43,7 +43,13 @@ export class DashboardComponent implements OnInit {
 
   newBudget : Budget = new Budget();
 
-  private modalInstance: any;
+  budget = {
+    description: '',
+    type: 'DEBIT',
+    category: '',
+    amount: null,
+    createdDate: ''
+  };
 
   budgetData = [
     { name: 'Food', value: 5000 },
@@ -114,22 +120,22 @@ export class DashboardComponent implements OnInit {
     this.onCategoryClick(event.name)
   }
 
-  openModal(): void {
-    this.modalElement.nativeElement.classList.add('show');
-    this.modalElement.nativeElement.style.display = 'block';
-    document.body.classList.add('modal-open'); // Prevents background scrolling
-  }
+  // openModal(): void {
+  //   this.modalElement.nativeElement.classList.add('show');
+  //   this.modalElement.nativeElement.style.display = 'block';
+  //   document.body.classList.add('modal-open'); // Prevents background scrolling
+  // }
 
-  closeModal(): void {
-    this.modalElement.nativeElement.classList.remove('show');
-    this.modalElement.nativeElement.style.display = 'none';
-    document.body.classList.remove('modal-open');
-  }
+  // closeModal(): void {
+  //   this.modalElement.nativeElement.classList.remove('show');
+  //   this.modalElement.nativeElement.style.display = 'none';
+  //   document.body.classList.remove('modal-open');
+  // }
 
-  submitBudget() : void {
-    console.log("Submitted");
-    this.closeModal();
-  }
+  // submitBudget() : void {
+  //   console.log("Submitted");
+  //   this.closeModal();
+  // }
   async loadChartData() {
     this.budgetDataChart = await this.generateBudgetData();
   }
@@ -160,5 +166,27 @@ export class DashboardComponent implements OnInit {
     this.budgetService.getTransactionDaily(event.name).subscribe(data => {
       this.dailyTransaction = data;
     })
+  }
+
+  submitBudget() {
+    this.budgetService.addBudget(this.budget).subscribe({
+      next: (response) => {
+        console.log('Budget added:', response);
+        this.resetForm();
+      },
+      error: (error) => {
+        console.error('Error adding budget:', error);
+      }
+    });
+  }
+
+  resetForm() {
+    this.budget = {
+      description: '',
+      type: 'DEBIT',
+      category: '',
+      amount: null,
+      createdDate: ''
+    };
   }
 }
