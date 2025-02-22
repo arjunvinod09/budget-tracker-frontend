@@ -189,4 +189,12 @@ export class DashboardComponent implements OnInit {
       createdDate: ''
     };
   }
+
+  getRemainingOrOverspent(total: number, noOfDays: number, currentDay: number, totalDaily: number): string {
+    const remainingAmount = ((29242 - total) / (noOfDays + 1 - currentDay)) - totalDaily;
+    return remainingAmount >= 0 
+      ? `Remaining today: ₹${remainingAmount.toFixed(2)}`
+      : `Overspent by: ₹${Math.abs(remainingAmount).toFixed(2)}`;
+  }
+  
 }

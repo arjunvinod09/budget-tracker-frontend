@@ -20,7 +20,7 @@
   </div>
   <br>
   <h5 class="text-center fw-bold text">
-    Remaining today : {{ (((29242 - total) / (noOfDays + 1 - currentDay)) - totalDaily) | currency:'INR'}}
+    {{ getRemainingOrOverspent(total, noOfDays, currentDay, totalDaily) }}
   </h5>
 
     <h2 class="text-center mt-4">Spend by Category</h2>
