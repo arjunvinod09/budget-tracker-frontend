@@ -1,25 +1,33 @@
 <div class="container mt-4">
+  <div *ngIf="(29242 - total)>0; else negativeBalance">
     <h1 class="text-center fw-bold display-6 text-primary">
         Total Spend: {{ total | currency:'INR' }} / 29,242.00
     </h1>
     <h2 class="text-center fw-bold text-danger">
-        Remaining: {{ (29242 - total) | currency:'INR' }}
+      Remaining: {{ (29242 - total) | currency:'INR' }}
     </h2>
     
     <h3 class="text-center fw-bold text-success">
     Daily Budget: {{ ((29242 - total) / (noOfDays + 1 - currentDay)) | currency:'INR' }}
     </h3>
+  </div>
 
-    <div class="container mt-4 d-flex justify-content-center">
-      <div id="spendBox" 
-           class="p-4 text-white text-center rounded shadow" 
-           [ngClass]="{'bg-danger': totalDaily > ((29242 - total) / (noOfDays + 1 - currentDay)), 'bg-success': totalDaily <= ((29242 - total) / (noOfDays + 1 - currentDay))}">
-          <h4>Today's Spend</h4>
-          <h2>{{ totalDaily | currency: 'INR' }}</h2>
-      </div>
+  <ng-template #negativeBalance>
+    <h2 class="text-danger text-center fw-bold">
+      You have exceeded the budget by {{ (total - 29242).toFixed(2) }}!
+    </h2>    
+  </ng-template>
+
+  <div class="container mt-4 d-flex justify-content-center">
+    <div id="spendBox" 
+          class="p-4 text-white text-center rounded shadow" 
+          [ngClass]="{'bg-danger': totalDaily > ((29242 - total) / (noOfDays + 1 - currentDay)), 'bg-success': totalDaily <= ((29242 - total) / (noOfDays + 1 - currentDay))}">
+        <h4>Today's Spend</h4>
+        <h2>{{ totalDaily | currency: 'INR' }}</h2>
+    </div>
   </div>
   <br>
-  <h5 class="text-center fw-bold text">
+  <h5 class="text-center fw-bold text" *ngIf="(29242 - total)>0">
     {{ getRemainingOrOverspent(total, noOfDays, currentDay, totalDaily) }}
   </h5>
 
